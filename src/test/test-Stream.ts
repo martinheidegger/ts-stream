@@ -1112,7 +1112,7 @@ describe("Stream", () => {
 		it("returns end error if stream ended with error", async () => {
 			swallowErrors(s.result());
 			const result = track(s.toArray());
-			swallowErrors(s.end(boomError));
+			s.end(boomError);
 			await settle([result.promise]);
 			expect(result.reason).to.deep.equal(boomError);
 		});

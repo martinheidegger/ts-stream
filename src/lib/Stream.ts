@@ -996,8 +996,10 @@ export class Stream<T> implements ReadableStream<T>, WritableStream<T> {
 	 */
 	public toArray(): Promise<T[]> {
 		let result: T[] = [];
-		return this.forEach((value: T) => { result.push(value); })
-			.then(() => result);
+		return this.forEach(
+			(value: T) => { result.push(value); },
+			(error?): void => { return; }
+		).then(() => result);
 	}
 
 	/**
